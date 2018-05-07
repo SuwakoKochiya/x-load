@@ -3,9 +3,11 @@ class xLoader {
     // 判断是否传入参数对象，如果没有创建一个空对象
     opts = opts ? opts : new Object()
     this.wrapper = opts.wrapper ? opts.wrapper : document.getElementById('xl-wrapper')
-    this.loader = opts.loader ? opts.loader : document.getElementById('loader')
+    this.loader = opts.loader ? opts.loader : document.getElementById('xl-loader')
     // data-src，图片链接，为防止与其他插件命名冲突
     this.attr = opts.attr ? opts.attr : 'data-src'
+    // prior属性存在时，图片会优先加载
+    this.prior = opts.prior ? opts.prior : 'prior'
     // 加载方式，默认为按序加载，配置false为同步加载
     this.async = 'async' in opts ? opts.async : true
     // 注册图片加载完成事件
@@ -19,7 +21,7 @@ class xLoader {
     this.wrapper.style.display = 'none'
     // 遍历dom 为不同加载顺序的img分组 priorArray(首批加载) othersArray(后续加载)
     this.el.forEach(element => {
-      if (element.hasAttribute('prior')) {
+      if (element.hasAttribute(this.prior)) {
         this.priorArray.push(element)
       } else {
         this.othersArray.push(element)
@@ -66,7 +68,6 @@ class xLoader {
       }
       recursion()
     } else {
-      console.log(1);
       this.othersArray.forEach(element => {
         element.src = element.getAttribute(this.attr)
         element.removeAttribute(this.attr)

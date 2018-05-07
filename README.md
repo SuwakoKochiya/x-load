@@ -1,28 +1,65 @@
-# x-build 4.0.1
+###### x-loader v1.0.0
 
-### 开发模式
-通过命令：`npm run dev`启动本地`Web Server(http://localhost:3000/)`，默认监听端口 3000，并实时监听文件，发生改动时，浏览器会自动热更新。
+## x-loader.js 是什么
 
-### 生产模式
-通过命令：`npm run build` 对整个项目进行打包，目录（./output）。
+x-loader是用于H5页面加载时，通过图片的加载的进度控制loading效果的ES6插件。
 
-### 功能&风格
-- 使用`pug（原jade）`作为模版引擎。
-- 使用`stylus`作为css预处理语言。
-- 使用`babel`编译es6代码。
-- 图片进行压缩处理，对`8kb`以下的图片进行`base64`处理。
+## 起步
 
-### 注意事项
+- 第一步。
 
-- 在使用`pug`模版引擎时，图片`img`通过`src=require()`引入：
-  ``` pug
-    img(src=require('./images/logo.png'))
+  通过import引入x-loader，通过`new`操作符创建一个新的xLoader对象。
+
+  ```javascript
+  // javascript
+  import xLoader from './scripts/x-loader'
+  new xLoader()
   ```
 
-- rem布局使用：
+- 第二步。
 
-    移动端建议使用'750px'设计稿，如果网页大于750px时，font-size为100px。
+  创建一个`id="xl-loader"`制作loading效果，为正文的包裹层增加`id="xl-wrapper"`(可配置:其他HTMLElement)。
 
-  rem换算：
+  `<img>`标签摒弃传统src属性，使用`data-src`传入图片链接。
 
-    设计稿尺寸除100，例如设计稿'20px'，换算20 / 100 = 0.2rem
+  具有`prior`属性的图片会在loading效果关闭前加载完成，不具有`prior`属性的会在loading效果结束后，默认按顺序加载(可配置:同时加载)。
+
+  ```html
+  <!-- html -->
+  <div id="xl-loader"></div>
+  <div id="xl-wrapper">
+    <img data-src="./abc.jpg" prior>
+  </div>
+  ```
+
+## 参数配置
+
+- 自定义配置事例：
+
+  ```javascript
+  new xLoader({
+    wrapper: document.getElementById('自定义'),
+    loader: document.getElementById('自定义'),
+    attr: '自定义', // 可代替data-src属性
+    prior: '自定义', // 可代替prior属性
+    async: 'true or false' // loading结束后是否按序加载剩余图片
+  }).then(() => {
+    // 当具有prior属性的图片加载全部完成时触发此函数
+  })
+  ```
+
+- 参数表
+
+| 参数 | 类型 | 默认值 | 说明 |
+| - | - | - | - | 
+| wrapper | HTMLElement | document.getElementById('xl-wrapper') | 控制正文的包裹层增，使其在文档加载时隐藏，在具有prior属性的图片加载完成后自动显示。 |
+| loader | HTMLElement | document.getElementById('xl-loader') | 控制loading元素，使其在文档加载时显示，在具有prior属性的图片加载完成后自动隐藏，同时触发.then() |
+| attr | string | 'data-src' | `<img data-src>`代替src，如果与其他插件参数冲突可以修改此项。 |
+| prior | string | 'prior' | `<img prior>`在loding效果时要加载的图片，如果与其他插件参数冲突可以修改此项。 |
+| async | boolean | 'true' | 控制loading结束后图片加载的方式，默认为按序加载，false可以设置为同时加载。 |
+
+- API
+
+  `then()`
+
+  在创建的xLoader对象，通过`.then(fn())`方法，传入函数,可以在具有prior属性的图片加载完成后触发。

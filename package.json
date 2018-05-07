@@ -1,6 +1,6 @@
 {
-  "name": "x-build",
-  "version": "4.0.3",
+  "name": "x-loader",
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
