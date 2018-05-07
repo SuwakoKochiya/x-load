@@ -8,8 +8,5 @@ import './styles/app.styl'
 import xLoader from './scripts/x-loader'
 
 new xLoader({
-  wrapper: document.getElementById('xl-wrapper'),
-  loader: document.getElementById('loader')
-}).then(() => {
-  
+  loader: document.getElementById('load')
 })
