@@ -50,13 +50,13 @@ x-loader是用于H5页面加载时，通过图片的加载的进度控制loadin
 
 - 参数表
 
-| 参数 | 类型 | 默认值 | 说明 |
-| - | - | - | - | 
-| wrapper | HTMLElement | document.getElementById('xl-wrapper') | 控制正文的包裹层增，使其在文档加载时隐藏，在具有prior属性的图片加载完成后自动显示。 |
-| loader | HTMLElement | document.getElementById('xl-loader') | 控制loading元素，使其在文档加载时显示，在具有prior属性的图片加载完成后自动隐藏，同时触发.then() |
-| attr | string | 'data-src' | `<img data-src>`代替src，如果与其他插件参数冲突可以修改此项。 |
-| prior | string | 'prior' | `<img prior>`在loding效果时要加载的图片，如果与其他插件参数冲突可以修改此项。 |
-| async | boolean | 'true' | 控制loading结束后图片加载的方式，默认为按序加载，false可以设置为同时加载。 |
+  | 参数 | 类型 | 默认值 | 说明 |
+  | - | - | - | - | 
+  | wrapper | HTMLElement | document.getElementById('xl-wrapper') | 控制正文的包裹层增，使其在文档加载时隐藏，在具有prior属性的图片加载完成后自动显示。 |
+  | loader | HTMLElement | document.getElementById('xl-loader') | 控制loading元素，使其在文档加载时显示，在具有prior属性的图片加载完成后自动隐藏，同时触发.then() |
+  | attr | string | 'data-src' | `<img data-src>`代替src，如果与其他插件参数冲突可以修改此项。 |
+  | prior | string | 'prior' | `<img prior>`在loding效果时要加载的图片，如果与其他插件参数冲突可以修改此项。 |
+  | async | boolean | 'true' | 控制loading结束后图片加载的方式，默认为按序加载，false可以设置为同时加载。 |
 
 - API
 
