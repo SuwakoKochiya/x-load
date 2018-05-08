@@ -64,6 +64,10 @@ class xLoader {
             count++
             recursion()
           }
+          element.onerror = () => {
+            count++
+            recursion()
+          }
         }
       }
       recursion()
