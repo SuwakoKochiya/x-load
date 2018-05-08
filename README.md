@@ -2,13 +2,13 @@
 
 ## x-loader.js 是什么
 
-x-loader是用于H5页面加载时，通过图片的加载的进度控制loading效果的ES6插件。
+x-loader是用于H5页面加载时，通过图片的加载的进度控制loading效果的ES6插件。
 
 ## 起步
 
 - 第一步。
 
-  通过import引入x-loader，通过`new`操作符创建一个新的xLoader对象。
+  通过import引入x-loader，通过`new`操作符创建一个新的xLoader对象。
 
   ```javascript
   // javascript
@@ -18,9 +18,9 @@ x-loader是用于H5页面加载时，通过图片的加载的进度控制loadin
 
 - 第二步。
 
-  创建一个`id="xl-loader"`制作loading效果，为正文的包裹层增加`id="xl-wrapper"`(可配置:其他HTMLElement)。
+  创建一个`id="xl-loader"`制作loading效果，为正文的包裹层增加`id="xl-wrapper"`(可配置:其他HTMLElement)。
 
-  `<img>`标签摒弃传统src属性，使用`data-src`传入图片链接。
+  `<img>`标签摒弃传统src属性，使用`data-src`传入图片链接。
 
   具有`prior`属性的图片会在loading效果关闭前加载完成，不具有`prior`属性的会在loading效果结束后，默认按顺序加载(可配置:同时加载)。
 
@@ -38,8 +38,8 @@ x-loader是用于H5页面加载时，通过图片的加载的进度控制loadin
 
   ```javascript
   new xLoader({
-    wrapper: document.getElementById('自定义'),
-    loader: document.getElementById('自定义'),
+    wrapper: document.getElementById('自定义'),
+    loader: document.getElementById('自定义'),
     attr: '自定义', // 可代替data-src属性
     prior: '自定义', // 可代替prior属性
     async: 'true or false' // loading结束后是否按序加载剩余图片
