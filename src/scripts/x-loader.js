@@ -34,20 +34,24 @@ class xLoader {
   priorLoad() {
     let count = 0
     let _this = this
-    this.priorArray.forEach(element => {
-      element.src = element.getAttribute(this.attr)
-      element.onload = () => {
-        element.removeAttribute(this.attr)
-        count++
-        if (count >= this.priorArray.length) {
-          this.wrapper.style.display = 'block'
-          if (this.loader) {
-            this.loader.style.display = 'none'
-          }
-          window.dispatchEvent(this.imgDone)
-          _this.othersLoad()
+    let render = () => {
+      count++
+      if (count >= this.priorArray.length) {
+        this.wrapper.style.display = 'block'
+        if (this.loader) {
+          this.loader.style.display = 'none'
         }
+        window.dispatchEvent(this.imgDone)
+        _this.othersLoad()
       }
+    }
+    this.load(this.priorArray, (element) => {
+      // onload
+      element.removeAttribute(this.attr)
+      render()
+    }, (element) => {
+      // onerror
+      render()
     })
   }
   othersLoad() {
@@ -80,6 +84,17 @@ class xLoader {
   }
   then(fn) {
     window.addEventListener('imgDone', () => fn(this))
+  }
+  load(arr, load, err) {
+    arr.forEach(element => {
+      element.src = element.getAttribute(this.attr)
+      element.onload = () => {
+        load(element)
+      }
+      element.onerror = () => {
+        err(element)
+      }
+    })
   }
 }
 export default xLoader

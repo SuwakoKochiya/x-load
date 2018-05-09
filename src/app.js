@@ -8,5 +8,5 @@ import './styles/app.styl'
 import xLoader from './scripts/x-loader'
 
 new xLoader().then(() => {
-  alert('loading结束，点击确定开始加载剩余图片')
+  // alert('loading结束，点击确定开始加载剩余图片')
 })

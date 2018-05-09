@@ -1,4 +1,4 @@
-###### x-loader v1.0.0
+###### x-loader v1.0.1
 
 ## x-loader.js 是什么
 
@@ -64,6 +64,13 @@ x-loader是用于H5页面加载时，通过图片的加载的进度控制loading
 
   在创建的xLoader对象，通过`.then(fn())`方法，传入函数,可以在具有prior属性的图片加载完成后触发。
 
+  
+github：[https://github.com/codexu/x-loader](https://github.com/codexu/x-loader)
+  
+下载：[https://github.com/codexu/x-loader/blob/master/src/scripts/x-loader.js](https://github.com/codexu/x-loader/blob/master/src/scripts/x-loader.js)
+
 ## update
+
+`v1.0.2` `18.05.09` : 解决优先加载的图片报错时卡住的bug。
 
 `v1.0.1` `18.05.08` : 解决按序加载时，图片加载报错时卡住的bug。
