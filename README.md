@@ -1,14 +1,16 @@
-###### x-loader v1.0.1
+<p align="center"><img width="160" src="https://github.com/codexu/_images/blob/master/x-logo/x-loader.png?raw=true" alt="x-loader"></p>
 
-## x-loader.js 是什么
+<p align="center">
+  <img src="https://img.shields.io/badge/version-1.0.2-blue.svg">
+</p>
+
+<h1 align="center">x-loader</h1>
 
 x-loader是用于H5页面加载时，通过图片的加载的进度控制loading效果的ES6插件。
 
 ## 起步
 
-- 第一步。
-
-  通过import引入x-loader，通过`new`操作符创建一个新的xLoader对象。
+- 通过import引入x-loader，通过`new`操作符创建一个新的xLoader对象。
 
   ```javascript
   // javascript
@@ -16,9 +18,7 @@ x-loader是用于H5页面加载时，通过图片的加载的进度控制loading
   new xLoader()
   ```
 
-- 第二步。
-
-  创建一个`id="xl-loader"`制作loading效果，为正文的包裹层增加`id="xl-wrapper"`(可配置:其他HTMLElement)。
+- 创建一个`id="xl-loader"`制作loading效果，为正文的包裹层增加`id="xl-wrapper"`(可配置:其他HTMLElement)。
 
   `<img>`标签摒弃传统src属性，使用`data-src`传入图片链接。
 
