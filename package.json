@@ -1,8 +1,8 @@
 {
-  "name": "x-build",
-  "version": "4.2.3",
+  "name": "x-load",
+  "version": "1.1.2",
   "description": "",
-  "main": "index.js",
+  "main": "src/utils/x-load.js",
   "scripts": {
     "dev": "rimraf dist && NODE_ENV=development webpack-dev-server --mode=development --config webpack.config.js",
     "build": "rimraf dist && NODE_ENV=production webpack --mode=production --config webpack.config.js"

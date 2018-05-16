@@ -1,9 +1,9 @@
-class xLoader {
+class xLoad {
   constructor(opts) {
     // 判断是否传入参数对象，如果没有创建一个空对象
     opts = opts ? opts : new Object()
     this.wrapper = opts.wrapper ? opts.wrapper : document.getElementById('xl-wrapper')
-    this.loader = opts.loader ? opts.loader : document.getElementById('xl-loader')
+    this.loader = opts.loader ? opts.loader : document.getElementById('xl-load')
     // data-src，图片链接，为防止与其他插件命名冲突
     this.attr = opts.attr ? opts.attr : 'data-src'
     // prior属性存在时，图片会优先加载
@@ -104,4 +104,4 @@ class xLoader {
     })
   }
 }
-export default xLoader
+export default xLoad

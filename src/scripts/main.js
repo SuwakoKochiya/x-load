@@ -1,8 +1,8 @@
-import xLoader from '../utils/x-loader'
+import xLoad from '../utils/x-load.js'
 
-let xloader = new xLoader()
+let xload = new xLoad()
 let percentEl = document.getElementById('percent')
 
-xloader.percentLoad(percent => {
+xload.percentLoad(percent => {
   percentEl.innerHTML = `加载进度:${percent}`
 })
