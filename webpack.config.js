@@ -1,97 +1,68 @@
 const path = require('path')
 const webpack = require('webpack')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
 
-const isDev = process.env.NODE_ENV === 'development'
+const isDev = process.env.NODE_ENV === 'development' ? true : false
 
 const config = {
-  // 入口
-  entry: path.join(__dirname, 'src/app.js'),
+  entry: path.join(__dirname, 'src/index.js'),
   output: {
     filename: 'bundle.[hash:8].js',
-    path: path.resolve(__dirname, 'output')
+    path: path.resolve(__dirname, 'dist')
   },
-  // 配置loader
   module: {
-    rules: [
-      // 编译es6
+    rules: [{
+        test: /\.styl$/,
+        exclude: /node_modules/,
+        use: [
+          isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader?sourceMap',
+          {
+            loader: 'px2rem-loader',
+            options: {
+              remUnit: 40,
+              remPrecision: 8
+            }
+          },
+          'postcss-loader',
+          'stylus-loader',
+        ]
+      },
       {
         test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /node_modules/,
         loader: 'babel-loader',
       },
-      // 编译jade
       {
         test: /\.(jade|pug)$/,
-        use: [{
-          loader: 'pug-loader',
-          options: {
-            pretty: isDev
-          }
-        }]
+        exclude: /node_modules/,
+        use: 'pug-loader'
       },
-      // 图片处理
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/,
         use: [{
           loader: 'url-loader',
           options: {
             limit: 8192,
-            name: 'assets/images/[name][hash].[ext]'
+            name: '[name][hash].[ext]',
+            outputPath: 'static/images/'
           }
         }]
       }
     ]
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: isDev ? '"development' : '"production'
-      }
-    }),
-    // 清理dist目录
-    new CleanWebpackPlugin(['output']),
-    // 配置入口模版文件
     new HtmlWebpackPlugin({
       template: './src/index.pug'
     })
   ]
 }
 
-// 开发模式
 if (isDev) {
-  config.module.rules.push(
-    {
-      test: /\.styl$/,
-      use: [
-        'style-loader',
-        {
-          loader: 'css-loader',
-          options: {
-            sourceMap: true
-          }
-        },
-        {
-          loader: 'postcss-loader',
-          options: {
-            sourceMap: true
-          }
-        },
-        {
-          loader: 'px2rem-loader',
-          options: {
-            remUnit: 40,
-            remPrecision: 8
-          }
-        },
-        'stylus-loader'
-      ]
-    }
-  )
-  config.devtool = '#cheap-module-eval-source-map'
+  // 开发模式
   config.devServer = {
     port: '3000',
     host: '0.0.0.0',
@@ -100,55 +71,38 @@ if (isDev) {
     },
     hot: true
   }
+  config.devtool = 'cheap-module-eval-source-map'
   config.plugins.push(
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin()
   )
-}
-
-// 生产模式
-if (!isDev) {
-  config.entry = {
-    app: path.join(__dirname, 'src/app.js'),
-    // vendor: ['loadsh']
-  },
-  config.output.filename = 'assets/scripts/[name].[chunkhash:8].js',
-  config.module.rules.push(
-    {
-      test: /\.styl$/,
-      use: ExtractTextPlugin.extract({
-        fallback: "style-loader",
-        use: [
-          'css-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              sourceMap: true
-            }
-          },
-          {
-            loader: 'px2rem-loader',
-            options: {
-              remUnit: 40,
-              remPrecision: 8
-            }
-          },
-          'stylus-loader'
-        ],
-        publicPath: '../../'
-      })
-    }
-  )
+} else {
+  // 生产模式
   config.plugins.push(
-    new UglifyJsPlugin(),
-    new ExtractTextPlugin('assets/style/style.[contentHash:8].css'),
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: 'vendor'
-    // }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'runtime'
+    new MiniCssExtractPlugin({
+      filename: 'style.[chunkhash:8].css',
     })
   )
+  config.optimization = {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /node_modules/,
+          chunks: 'initial',
+          name: 'vendor',
+          priority: 10
+        }
+      }
+    },
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true
+      }),
+      new OptimizeCSSAssetsPlugin({})
+    ]
+  }
 }
 
 module.exports = config

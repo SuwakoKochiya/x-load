@@ -6,26 +6,21 @@ html(lang="en")
   body
     #xl-loader.transition-loader
       .transition-loader-inner
-        i
-        i
-        i
-        i
-        i
-        i
-    #xl-wrapper.wrapper
+        - for (var i = 0; i < 5; i++)
+          i
+        p#percent 加载进度:0%
+    #xl-wrapper.wrapper(style="display: none")
       .content
         h1 需要在loading效果时加载的图片
         img(data-src=require("./assets/images/1.jpg") prior)
         img(data-src=require("./assets/images/2.jpg") prior)
-        img(data-src="http://ada.com/1dasxc.jpg" prior)
+        img(data-src=require("./assets/images/3.jpg") prior)
+        img(data-src=require("./assets/images/4.jpg") prior)
+        img(data-src=require("./assets/images/5.jpg") prior)
+        img(data-src=require("./assets/images/6.jpg") prior)
       .content
         h1 loading结束后开始加载的图片
-        img(data-src=require("./assets/images/3.jpg"))
-        img(data-src=require("./assets/images/4.jpg"))
-        img(data-src=require("./assets/images/5.jpg"))
-        img(data-src=require("./assets/images/6.jpg"))
         img(data-src=require("./assets/images/7.jpg"))
         img(data-src=require("./assets/images/8.jpg"))
         img(data-src=require("./assets/images/9.jpg"))
         img(data-src=require("./assets/images/10.jpg"))
-      

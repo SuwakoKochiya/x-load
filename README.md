@@ -64,12 +64,19 @@ x-loader是用于H5页面加载时，通过图片的加载的进度控制loading
 
   在创建的xLoader对象，通过`.then(fn())`方法，传入函数,可以在具有prior属性的图片加载完成后触发。
 
+  `percentLoad()` 此项用于显示当前加载百分比
+
+  在创建的xLoader对象，通过`.percentLoad(fn(percent))`方法，传入函数,每一张具有prior属性的图片加载完成时触发，函数传递一个参数`percent`获取当前图片加载的百分比。
+
+
   
 github：[https://github.com/codexu/x-loader](https://github.com/codexu/x-loader)
   
 下载：[https://github.com/codexu/x-loader/blob/master/src/scripts/x-loader.js](https://github.com/codexu/x-loader/blob/master/src/scripts/x-loader.js)
 
 ## update
+
+`v1.1.0` `18.05.16` : 新加 api`percentLoad`用于显示当前加载百分比，整个项目已更新为x-build4.2.3版本
 
 `v1.0.2` `18.05.09` : 解决优先加载的图片报错时卡住的bug。
 

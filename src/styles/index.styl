@@ -1,6 +1,5 @@
-@import "./reset.styl"
-@import "./loader.styl"
-
+@import "../utils/reset.styl"
+@import "../utils/x-loader.styl"
 body
   background #2C3643
 
@@ -22,7 +21,10 @@ body
       width ($width / 2) - $margin * 2 - $border * 2
       height 200px
       border solid $border #fff
-
+.transition-loader
+  p
+    font-size 18px
+    margin-top 24px
 #box
   width 100px
   height 100px

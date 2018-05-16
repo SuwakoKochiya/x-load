@@ -12,9 +12,11 @@ class xLoader {
     this.async = 'async' in opts ? opts.async : true
     // 注册图片加载完成事件
     this.imgDone = new Event('imgDone')
+    this.percentDone = new Event('percentDone')
     this.el = document.querySelectorAll(`img[${this.attr}]`) // 获取<img>具有data-src属性的元素x
     this.priorArray = new Array() // 预先加载图片数组
     this.othersArray = new Array() // 后续加载图片数组
+    this.percent = 0 // 加载进度
     this.init()
   }
   init() {
@@ -36,6 +38,8 @@ class xLoader {
     let _this = this
     let render = () => {
       count++
+      this.percent = ((count / this.priorArray.length).toFixed(2) * 100) + '%'
+      window.dispatchEvent(this.percentDone)
       if (count >= this.priorArray.length) {
         this.wrapper.style.display = 'block'
         if (this.loader) {
@@ -53,6 +57,9 @@ class xLoader {
       // onerror
       render()
     })
+  }
+  percentLoad(fn) {
+    window.addEventListener('percentDone', () => fn(this.percent))
   }
   othersLoad() {
     if (this.async) {
