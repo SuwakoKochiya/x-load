@@ -1,7 +1,7 @@
 <p align="center"><img width="160" src="https://github.com/codexu/_images/blob/master/x-logo/x-loader.png?raw=true" alt="x-loader"></p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.0.2-blue.svg">
+  <img src="https://img.shields.io/badge/version-1.1.0-blue.svg">
 </p>
 
 <h1 align="center">x-loader</h1>
