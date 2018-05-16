@@ -1,7 +1,7 @@
 <p align="center"><img width="160" src="https://github.com/codexu/_images/blob/master/x-logo/x-load.png?raw=true" alt="x-load"></p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.1.2-blue.svg">
+  <img src="https://img.shields.io/badge/version-1.1.3-blue.svg">
 </p>
 
 <h1 align="center">x-load</h1>
@@ -10,11 +10,17 @@ x-load是用于H5页面加载时，通过图片的加载的进度控制loading�
 
 ## 起步
 
+- 通过npm安装
+
+```
+  npm install x-load --save
+```
+
 - 通过import引入x-load，通过`new`操作符创建一个新的xLoad对象。
 
   ```javascript
   // javascript
-  import xLoad from './scripts/x-load'
+  import xLoad from 'x-load'
   new xLoad()
   ```
 
@@ -72,7 +78,7 @@ x-load是用于H5页面加载时，通过图片的加载的进度控制loading�
   
 github：[https://github.com/codexu/x-load](https://github.com/codexu/x-load)
   
-下载：[https://github.com/codexu/x-load/blob/master/src/utils/x-load.js](https://github.com/codexu/x-load/blob/master/src/utils/x-load.js)
+源码下载：[https://github.com/codexu/x-load/blob/master/src/utils/x-load.js](https://github.com/codexu/x-load/blob/master/src/utils/x-load.js)
 
 ## update
 
