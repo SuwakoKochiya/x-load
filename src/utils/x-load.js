@@ -38,7 +38,7 @@ class xLoad {
     let _this = this
     let render = () => {
       count++
-      this.percent = ((count / this.priorArray.length).toFixed(2) * 100) + '%'
+      this.percent = (count / this.priorArray.length).toFixed(2)
       window.dispatchEvent(this.percentDone)
       if (count >= this.priorArray.length) {
         this.wrapper.style.display = 'block'

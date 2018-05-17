@@ -1,7 +1,7 @@
 <p align="center"><img width="160" src="https://github.com/codexu/_images/blob/master/x-logo/x-load.png?raw=true" alt="x-load"></p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.1.3-blue.svg">
+  <img src="https://img.shields.io/badge/version-1.1.4-blue.svg">
 </p>
 
 <h1 align="center">x-load</h1>
@@ -72,15 +72,15 @@ x-load是用于控制图片加载的ES6插件，主要功能为：提前加载�
 
   `percentLoad()` 此项用于显示当前加载百分比
 
-  在创建的xLoad对象，通过`.percentLoad(fn(percent))`方法，传入函数,每一张具有prior属性的图片加载完成时触发，函数传递一个参数`percent`获取当前图片加载的百分比。
+  在创建的xLoad对象，通过`.percentLoad(fn(percent))`方法，传入函数,每一张具有prior属性的图片加载完成时触发，函数传递一个参数`percent`获取当前图片加载的进度，此值为`0-1`的小数。
 
-
-  
 github：[https://github.com/codexu/x-load](https://github.com/codexu/x-load)
   
 源码下载：[https://github.com/codexu/x-load/blob/master/src/utils/x-load.js](https://github.com/codexu/x-load/blob/master/src/utils/x-load.js)
 
 ## update
+
+`v1.1.4` `18.05.17` : percentLoad参数进度改为0-1的小数，可以更方便的使用其他loading组件。
 
 `v1.1.2` `18.05.16` : npm命名冲突，故改名x-load，现已上传npm。
 
